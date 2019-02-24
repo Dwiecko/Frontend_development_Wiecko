@@ -1,1 +1,1 @@
-## Dawid Wiecko
+## Dawid Więcko
