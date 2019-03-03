@@ -32,6 +32,9 @@ console.log("Production year before change: " + CanonCamera.ProductionYear);
 editCamerasYear("Canon", 2020)
 console.log("Production year after change: " + CanonCamera.ProductionYear);
 
+editCameraYear("Lumix DC-FZ82", 2020);
+console.log(PanasonicCamera.ProductionYear);
+
 function addCamera(producer, model, productionYear, usb20, price)
 {
     var newCamera = {
@@ -52,7 +55,8 @@ function editCamerasYear(producer, newProductionYear)
 
 function editCameraYear(model, newProductionYear)
 {
-    camerasArray.filter(camera => camera.Model === model).forEach(x => x.ProductionYear = newProductionYear);
+    var camera = camerasArray.find(camera => camera.Model === model);
+    camera.ProductionYear = newProductionYear;
 }
 
 function removeCamera(model){
@@ -60,7 +64,7 @@ function removeCamera(model){
 }
 
 function findCamerasByProducer(producerToFind){
-    return camerasArray.findBy(x => x.Producer === producerToFind);
+    return camerasArray.find(x => x.Producer === producerToFind);
 }
 
 function getCameraByModel(modelToFind){
