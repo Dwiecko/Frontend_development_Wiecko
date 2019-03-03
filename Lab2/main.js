@@ -28,12 +28,20 @@ console.log("Cameras array length before adding a new element: " + camerasArray.
 addCamera("Panasonic", "Lumix AB-ABCD2", 2017, true, 20000.00);
 console.log("Cameras array length after adding a new element: " + camerasArray.length);
 
-console.log("Production year before change: " + CanonCamera.ProductionYear);
-editCamerasYear("Canon", 2020)
-console.log("Production year after change: " + CanonCamera.ProductionYear);
+console.log("All Canon cameras production year before change: " + CanonCamera.ProductionYear);
+editCamerasYear("Canon", 2020);
+console.log("All Canon cameras year after change: " + CanonCamera.ProductionYear);
 
-editCameraYear("Lumix DC-FZ82", 2020);
-console.log(PanasonicCamera.ProductionYear);
+console.log("Nikon camera year before: " + NikonCamera.ProductionYear);
+editCameraYear("ZX300", 2020);
+console.log("Nikon camera year after: " + NikonCamera.ProductionYear);
+
+//console.log("Cameras array length before removing a element: " + camerasArray.length);
+//removeCamera("ZX300");
+//console.log("Cameras array length after removing a element: " + camerasArray.length);
+
+var newElement = getCameraByModel("ZX300");
+console.log("Searched camera producer: " + newElement.Producer)
 
 function addCamera(producer, model, productionYear, usb20, price)
 {
@@ -60,7 +68,7 @@ function editCameraYear(model, newProductionYear)
 }
 
 function removeCamera(model){
-    camerasArray.find(camera => camera.Model === model);
+
 }
 
 function findCamerasByProducer(producerToFind){
