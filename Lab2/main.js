@@ -36,9 +36,9 @@ console.log("Nikon camera year before: " + NikonCamera.ProductionYear);
 editCameraYear("ZX300", 2020);
 console.log("Nikon camera year after: " + NikonCamera.ProductionYear);
 
-//console.log("Cameras array length before removing a element: " + camerasArray.length);
-//removeCamera("ZX300");
-//console.log("Cameras array length after removing a element: " + camerasArray.length);
+console.log("Cameras array length before removing a element: " + camerasArray.length);
+removeCamera("Lumix AB-ABCD2");
+console.log("Cameras array length after removing a element: " + camerasArray.length);
 
 var newElement = getCameraByModel("ZX300");
 console.log("Searched camera producer: " + newElement.Producer)
@@ -67,14 +67,26 @@ function editCameraYear(model, newProductionYear)
     camera.ProductionYear = newProductionYear;
 }
 
-function removeCamera(model){
+function removeCamera(model)
+{
+    var itemToRemove = camerasArray.find(camera => camera.Model === model);
 
+    var index = camerasArray.indexOf(itemToRemove);
+
+    if (index !== -1 )
+    {
+        console.log("Removing camera with index: " + index);
+
+        camerasArray.splice(index, 1);
+    }
 }
 
-function findCamerasByProducer(producerToFind){
+function findCamerasByProducer(producerToFind)
+{
     return camerasArray.find(x => x.Producer === producerToFind);
 }
 
-function getCameraByModel(modelToFind){
+function getCameraByModel(modelToFind)
+{
     return camerasArray.find(x => x.Model === modelToFind);
 }
