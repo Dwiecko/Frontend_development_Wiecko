@@ -6,6 +6,14 @@ var NikonCamera = {
     Price: 1000.00
 }
 
+var NikonCameraProfessional = {
+    Producer: "Nikon",
+    Model: "ZX500",
+    ProductionYear: 2019,
+    USB20: true,
+    Price: 10000.00
+}
+
 var CanonCamera = {
     Producer: "Canon",
     Model: "EOS1300D",
@@ -22,14 +30,14 @@ var PanasonicCamera = {
     Price: 4000.00
 }
 
-var camerasArray = [NikonCamera, CanonCamera];
+var camerasArray = [NikonCamera, NikonCameraProfessional, CanonCamera];
 
 console.log("Cameras array length before adding a new element: " + camerasArray.length);
 addCamera("Panasonic", "Lumix AB-ABCD2", 2017, true, 20000.00);
 console.log("Cameras array length after adding a new element: " + camerasArray.length);
 
 console.log("All Canon cameras production year before change: " + CanonCamera.ProductionYear);
-editCamerasYear("Canon", 2020);
+editCamerasYear("Canon", 2025);
 console.log("All Canon cameras year after change: " + CanonCamera.ProductionYear);
 
 console.log("Nikon camera year before: " + NikonCamera.ProductionYear);
@@ -37,41 +45,52 @@ editCameraYear("ZX300", 2020);
 console.log("Nikon camera year after: " + NikonCamera.ProductionYear);
 
 console.log("Cameras array length before removing a element: " + camerasArray.length);
-removeCamera("Lumix AB-ABCD2");
+removeCamera("ZX300");
 console.log("Cameras array length after removing a element: " + camerasArray.length);
 
-var newElement = getCameraByModel("ZX300");
+var newElement = findCameraByModel("ZX500");
 console.log("Searched camera producer: " + newElement.Producer)
+
+console.log("Creating camera that already exists in database");
+addCamera("Panasonic", "Lumix AB-ABCD2", 2017, true, 20000.00);
+console.log("Cameras array length: " + camerasArray.length);
 
 function addCamera(producer, model, productionYear, usb20, price)
 {
-    var newCamera = {
-        Producer: producer,
-        Model: model,
-        ProductionYear: productionYear,
-        USB20: usb20,
-        Price: price
+    if(camerasArray.indexOf(findCameraByModel(model)) == -1)
+    {
+        console.log("Successfully added a new Camera model: " + model);
+        camerasArray.push({
+            Producer: producer,
+            Model: model,
+            ProductionYear: productionYear,
+            USB20: usb20,
+            Price: price
+        });
     }
-
-    camerasArray.push(newCamera)
+    else
+    {
+        console.log("Database already contains camera model: " + model);
+    }
 }
 
 function editCamerasYear(producer, newProductionYear)
 {
-    camerasArray.filter(camera => camera.Producer === producer).forEach(x => x.ProductionYear = newProductionYear);
+    var cameras = findCamerasByProducer(producer);
+
+    cameras.forEach(x => x.ProductionYear = newProductionYear);
 }
 
 function editCameraYear(model, newProductionYear)
 {
-    var camera = camerasArray.find(camera => camera.Model === model);
+    var camera = findCameraByModel(model);
+
     camera.ProductionYear = newProductionYear;
 }
 
 function removeCamera(model)
 {
-    var itemToRemove = camerasArray.find(camera => camera.Model === model);
-
-    var index = camerasArray.indexOf(itemToRemove);
+    var index = camerasArray.indexOf(findCameraByModel(model));
 
     if (index !== -1 )
     {
@@ -79,14 +98,22 @@ function removeCamera(model)
 
         camerasArray.splice(index, 1);
     }
+    else
+    {
+        console.log("Unable to find a camera with given model");
+    }
 }
 
 function findCamerasByProducer(producerToFind)
 {
-    return camerasArray.find(x => x.Producer === producerToFind);
+    var cameras = camerasArray.filter(function(camera){
+        return camera.Producer === producerToFind;
+    });
+
+    return cameras;
 }
 
-function getCameraByModel(modelToFind)
+function findCameraByModel(modelToFind)
 {
     return camerasArray.find(x => x.Model === modelToFind);
 }
