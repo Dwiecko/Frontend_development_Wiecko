@@ -24,36 +24,26 @@ var PanasonicCamera = {
 
 var camerasArray = [];
 
-function Camera(producer, model, productionYear, usb20, price)
-{
-    this.producer = producer,
-    this.model = model,
-    this.productionYear = productionYear,
-    this.usb20 = usb20,
-    this.price = price
 
-    camerasArray.push(addSingleCamera(camerasArray, producer, model, productionYear, usb20, price));
-}
 
 // Private methods
 Camera.prototype = {
-
 }
 
 // Public methods
-Camera.prototype.getProducer = function() 
+Camera.prototype.getProducer = function()
 {
     return this.Producer;
 }
-Camera.prototype.getModel = function() 
+Camera.prototype.getModel = function()
 {
     return this.model;
 }
-Camera.prototype.getProductionYear = function() 
+Camera.prototype.getProductionYear = function()
 {
     return this.productionYear;
 }
-Camera.prototype.getUsb20 = function() 
+Camera.prototype.getUsb20 = function()
 {
     return this.usb20;
 }
@@ -61,8 +51,6 @@ Camera.prototype.getUsb20 = function()
 //private
 function addSingleCamera(producer, model, productionYear, usb20, price)
 {
-    console.log("Successfully added a new Camera model: " + model);
-    
     return {
         Producer: producer,
         Model: model,
@@ -70,6 +58,28 @@ function addSingleCamera(producer, model, productionYear, usb20, price)
         USB20: usb20,
         Price: price
     };
+}
+
+function Camera(_producer, _model, _productionYear, _usb20, _price)
+{
+    producer = _producer,
+    model = _model,
+    productionYear = _productionYear,
+    usb20 = _usb20,
+    price = _price
+
+    camerasArray.push(addSingleCamera(_producer, _model, _productionYear, _usb20, _price));
+
+    printCamera = function(){
+        console.log("Successfully added a new camera");
+        console.log("Camera producer: " + producer);
+        console.log("Camera model: " + model);
+        console.log("Camera productionYear: " + productionYear);
+        console.log("Camera has USB 2.0: " + usb20);
+        console.log("Camera price: " + price);
+    }
+
+    printCamera();
 }
 
 // Object invoke
