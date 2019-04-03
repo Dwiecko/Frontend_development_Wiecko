@@ -49,7 +49,7 @@ removeCamera("ZX300");
 console.log("Cameras array length after removing a element: " + camerasArray.length);
 
 var newElement = findCameraByModel("ZX500");
-console.log("Searched camera producer: " + newElement.Producer)
+console.log("Searched camera model: " + newElement.Model)
 
 console.log("Creating camera that already exists in database");
 addCamera("Panasonic", "Lumix AB-ABCD2", 2017, true, 20000.00);
@@ -78,7 +78,9 @@ function editCamerasYear(producer, newProductionYear)
 {
     var cameras = findCamerasByProducer(producer);
 
-    cameras.forEach(x => x.ProductionYear = newProductionYear);
+    cameras.forEach(function(camera){
+        camera.ProductionYear = newProductionYear}
+    );
 }
 
 function editCameraYear(model, newProductionYear)
@@ -115,5 +117,11 @@ function findCamerasByProducer(producerToFind)
 
 function findCameraByModel(modelToFind)
 {
-    return camerasArray.find(x => x.Model === modelToFind);
+    var searchedCamera = camerasArray.find(function(camera){
+        return camera.Model === modelToFind;
+    });
+
+    if(searchedCamera === undefined) console.log("Unable to find a model: " + modelToFind);
+
+    return searchedCamera;
 }
