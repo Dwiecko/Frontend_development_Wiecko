@@ -24,12 +24,6 @@ var PanasonicCamera = {
 
 var camerasArray = [];
 
-
-
-// Private methods
-Camera.prototype = {
-}
-
 // Public methods
 Camera.prototype.getProducer = function()
 {
@@ -48,8 +42,38 @@ Camera.prototype.getUsb20 = function()
     return usb20;
 }
 
+Camera.prototype.AddNewCamera = function(_producer, _model, _productionYear, _usb20, _price)
+{
+    if(camerasArray.indexOf(findCameraByModel(model)) == -1)
+    {
+        console.log("Successfully added a new Camera model: " + model);
+        camerasArray.push({
+            Producer: producer,
+            Model: model,
+            ProductionYear: productionYear,
+            USB20: usb20,
+            Price: price
+        });
+    }
+    else
+    {
+        console.log("Database already contains camera model: " + model);
+    }
+    return usb20;
+}
+
+function findCameraByModel(modelToFind)
+{
+    var searchedCamera = camerasArray.find(
+        function(camera){
+            camera.Model === modelToFind;
+    });
+
+    return searchedCamera;
+}
+
 //private
-function addSingleCamera(_producer, _model, _productionYear, _usb20, _price)
+function createSingleCamera(_producer, _model, _productionYear, _usb20, _price)
 {
     return {
         producer: _producer,
@@ -68,7 +92,7 @@ function Camera(_producer, _model, _productionYear, _usb20, _price)
     usb20 = _usb20,
     price = _price
 
-    camerasArray.push(addSingleCamera(_producer, _model, _productionYear, _usb20, _price));
+    camerasArray.push(createSingleCamera(_producer, _model, _productionYear, _usb20, _price));
 
     printCamera = function(){
         console.log("Successfully added a new camera");
