@@ -1,116 +1,156 @@
 var NikonCamera = {
-    Producer: "Nikon",
-    Model: "ZX300",
-    ProductionYear: 2017,
-    USB20: true,
-    Price: 1000.00
-}
+  producer: "Nikon",
+  model: "ZX300",
+  productionYear: 2017,
+  uSB20: true,
+  price: 1000.0
+};
 
 var CanonCamera = {
-    Producer: "Canon",
-    Model: "EOS1300D",
-    ProductionYear: 2019,
-    USB20: false,
-    Price: 10000.00
-}
+  producer: "Canon",
+  model: "EOS1300D",
+  productionYear: 2019,
+  uSB20: false,
+  price: 10000.0
+};
 
 var PanasonicCamera = {
-    Producer: "Panasonic",
-    Model: "Lumix DC-FZ82",
-    ProductionYear: 2019,
-    USB20: false,
-    Price: 4000.00
-}
+  producer: "Panasonic",
+  model: "Lumix DC-FZ82",
+  productionYear: 2019,
+  uSB20: false,
+  price: 4000.0
+};
 
-var camerasArray = [];
+var camerasModule = (function() {
+  var camerasArray = [PanasonicCamera];
 
-// Public methods
-Camera.prototype.getProducer = function()
-{
-    return producer;
-}
-Camera.prototype.getModel = function()
-{
-    return model;
-}
-Camera.prototype.getProductionYear = function()
-{
-    return productionYear;
-}
-Camera.prototype.getUsb20 = function()
-{
-    return usb20;
-}
+  return {
+    findCameraByModel: function(modelToFind) {
+      console.log("Searching for: " + modelToFind);
 
-Camera.prototype.AddNewCamera = function(_producer, _model, _productionYear, _usb20, _price)
-{
-    if(camerasArray.indexOf(findCameraByModel(model)) == -1)
-    {
-        console.log("Successfully added a new Camera model: " + model);
-        camerasArray.push({
-            Producer: producer,
-            Model: model,
-            ProductionYear: productionYear,
-            USB20: usb20,
-            Price: price
-        });
-    }
-    else
-    {
-        console.log("Database already contains camera model: " + model);
-    }
-    return usb20;
-}
+      var searchedCamera = camerasArray.find(x => x.model === modelToFind);
+      console.log("Found: " + searchedCamera.model);
 
-function findCameraByModel(modelToFind)
-{
-    var searchedCamera = camerasArray.find(
-        function(camera){
-            camera.Model === modelToFind;
-    });
+      return searchedCamera;
+    },
 
-    return searchedCamera;
-}
-
-//private
-function createSingleCamera(_producer, _model, _productionYear, _usb20, _price)
-{
-    return {
+    createSingleCamera: function(
+      _producer,
+      _model,
+      _productionYear,
+      _usb20,
+      _price
+    ) {
+      camerasArray.push({
         producer: _producer,
         model: _model,
         productionYear: _productionYear,
         usb20: _usb20,
         price: _price
-    };
-}
-
-function Camera(_producer, _model, _productionYear, _usb20, _price)
-{
-    producer = _producer,
-    model = _model,
-    productionYear = _productionYear,
-    usb20 = _usb20,
-    price = _price
-
-    camerasArray.push(createSingleCamera(_producer, _model, _productionYear, _usb20, _price));
-
-    printCamera = function(){
-        console.log("Successfully added a new camera");
-        console.log("Camera producer: " + producer);
-        console.log("Camera model: " + model);
-        console.log("Camera productionYear: " + productionYear);
-        console.log("Camera has USB 2.0: " + usb20);
-        console.log("Camera price: " + price);
+      });
+      console.log("Successfully added a new Camera model: " + _model);
+    },
+    printCameras: function() {
+      camerasArray.forEach(function(camera) {
+        console.log("Camera model: " + camera.model);
+      });
     }
+  };
+})();
 
-    printCamera();
+function Camera(producer, model, productionYear, usb20, price) {
+  (this.producer = producer),
+    (this.model = model),
+    (this.productionYear = productionYear),
+    (this.usb20 = usb20),
+    (this.price = price);
 }
+
+// Public methods
+Camera.prototype.getProducer = function() {
+  return this.producer;
+};
+Camera.prototype.getModel = function() {
+  return this.model;
+};
+Camera.prototype.getProductionYear = function() {
+  return this.productionYear;
+};
+Camera.prototype.getUsb20 = function() {
+  return this.usb20;
+};
 
 Camera.prototype = Object.create(Camera.prototype);
 Camera.prototype.constructor = Camera;
 
-var camerasClass = new Camera("Panasonic", "Lumix AB-ABCD2", 2017, true, 20000.00);
-console.log("Public method, get production year: " + camerasClass.getProductionYear());
+function SportCamera(
+  producer,
+  model,
+  productionYear,
+  usb20,
+  price,
+  waterproof
+) {
+  Camera.call(this, producer, model, productionYear, usb20, price);
 
-var secondCamera = new Camera("Lumix", "Lumix AB-ABCD2", 2017, true, 20000.00)
-camerasArray.push(secondCamera);
+  this.waterproof = waterproof;
+}
+
+SportCamera.prototype = Object.create(Camera.prototype);
+SportCamera.prototype.constructor = SportCamera;
+
+SportCamera.prototype.getWaterproofProperty = function() {
+  return this.waterproof;
+};
+
+SportCamera.prototype.setWaterproofProperty = function(waterproof) {
+  this.waterproof = waterproof;
+};
+
+var camerasClass = new Camera(
+  "Panasonic",
+  "Lumix AB-ABCD2",
+  2017,
+  true,
+  20000.0
+);
+
+var sportCameraClass = new SportCamera(
+  "Go Pro",
+  "Hero 5",
+  2019,
+  true,
+  1500.0,
+  true
+);
+
+console.log(
+  "Public method, get production year: " + camerasClass.getProductionYear()
+);
+
+camerasModule.createSingleCamera(
+  "PanasonicAA",
+  "LumixAA AB-ABCD2",
+  2017,
+  true,
+  20000.0
+);
+
+camerasModule.printCameras();
+
+var searchedCamera = camerasModule.findCameraByModel("Lumix DC-FZ82");
+console.log("Searched camera model: " + searchedCamera.model);
+
+console.log(
+  "Sport camera, waterproof: " + sportCameraClass.getWaterproofProperty()
+);
+var waterProofState = false;
+sportCameraClass.setWaterproofProperty(false);
+console.log("Setting waterproof to: " + waterProofState);
+console.log(
+  "Sport camera, waterproof: " + sportCameraClass.getWaterproofProperty()
+);
+
+// Access to private function cause an exception
+//findCameraByModel("Lumix DC-FZ82");
