@@ -27,12 +27,12 @@ var camerasModule = (function() {
 
   return {
     findCameraByModel: function(modelToFind) {
-      console.log("Searching for: " + modelToFind);
+      var searchedCamera = camerasArray.find(function(camera){
+        return camera.model === modelToFind;
+      });
 
-      var searchedCamera = camerasArray.find(x => x.model === modelToFind);
-      console.log("Found: " + searchedCamera.model);
-
-      return searchedCamera;
+      if(searchedCamera != undefined) return searchedCamera;
+      console.log("Unable to find given camera model: " + modelToFind);
     },
 
     createSingleCamera: function(
@@ -141,7 +141,6 @@ camerasModule.printCameras();
 
 var searchedCamera = camerasModule.findCameraByModel("Lumix DC-FZ82");
 console.log("Searched camera model: " + searchedCamera.model);
-
 console.log(
   "Sport camera, waterproof: " + sportCameraClass.getWaterproofProperty()
 );
@@ -154,3 +153,4 @@ console.log(
 
 // Access to private function cause an exception
 //findCameraByModel("Lumix DC-FZ82");
+//console.log("Searched nullable camera model: " + camerasModule.findCameraByModel("Test"));
