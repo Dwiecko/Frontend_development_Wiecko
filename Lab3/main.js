@@ -108,6 +108,10 @@ SportCamera.prototype.getWaterproofProperty = function() {
   return this.waterproof;
 };
 
+SportCamera.prototype.takePictureUnderwater = function() {
+  return "Bul bul bul...."
+};
+
 SportCamera.prototype.setWaterproofProperty = function(waterproof) {
   this.waterproof = waterproof;
 };
@@ -148,6 +152,11 @@ console.log("Searched camera model: " + searchedCamera.model);
 console.log(
   "Sport camera, waterproof: " + sportCameraClass.getWaterproofProperty()
 );
+
+console.log(
+  "Take picture underwater: " + sportCameraClass.takePictureUnderwater()
+);
+
 console.log(camerasClass.takePicture());
 var waterProofState = false;
 sportCameraClass.setWaterproofProperty(false);
