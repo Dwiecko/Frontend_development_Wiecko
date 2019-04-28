@@ -31,6 +31,10 @@ class Camera {
         this._camerasArray.forEach(camera => console.log(camera));
     };
 
+    takePicture(){
+        return "Taking an picture...";
+    }
+
     getProducer() {
         return this._producer;
     };
@@ -81,6 +85,7 @@ console.log(`Public method, get production year: ${camerasClass.getProductionYea
 
 console.log(`All cameras before adding an element`);
 camerasClass.printCameras();
+camerasClass.takePicture();
 camerasClass.createSingleCamera(
     "PanasonicAA",
     "LumixAA AB-ABCD1",
