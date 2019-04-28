@@ -89,7 +89,9 @@ console.log(`Public method, get production year: ${camerasClass.getProductionYea
 
 console.log(`All cameras before adding an element`);
 camerasClass.printCameras();
-camerasClass.takePicture();
+console.log(camerasClass.takePicture());
+console.log(sportCameraClass.takePictureUnderwater());
+
 camerasClass.createSingleCamera(
     "PanasonicAA",
     "LumixAA AB-ABCD1",
