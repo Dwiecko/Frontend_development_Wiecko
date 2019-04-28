@@ -81,6 +81,10 @@ Camera.prototype.getUsb20 = function() {
   return this.usb20;
 };
 
+Camera.prototype.takePicture = function() {
+  return "Taking an picture...";
+};
+
 Camera.prototype = Object.create(Camera.prototype);
 Camera.prototype.constructor = Camera;
 
@@ -144,6 +148,7 @@ console.log("Searched camera model: " + searchedCamera.model);
 console.log(
   "Sport camera, waterproof: " + sportCameraClass.getWaterproofProperty()
 );
+console.log(camerasClass.takePicture());
 var waterProofState = false;
 sportCameraClass.setWaterproofProperty(false);
 console.log("Setting waterproof to: " + waterProofState);
