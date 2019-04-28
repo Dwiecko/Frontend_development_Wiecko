@@ -62,6 +62,10 @@ class SportCamera extends Camera {
     setWaterproofProperty(waterproof) {
         this._waterproof = waterproof;
     };
+
+    takePictureUnderwater() {
+        return "Taking picture underwater....";
+    }
 }
 
 const camerasClass = new Camera(
