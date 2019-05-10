@@ -1,18 +1,38 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import "./App.css";
+import Camera from "./Components/Camera";
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
+      <div>
+        <div className="testDiv">
+          <Camera
+            producer="Nikon"
+            model="RX 3000"
+            productionYear="2000"
+            usb20="true"
+            price="3000.00"
+          />
         </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <div>
+          <Camera
+            producer="Sony"
+            model="Alfa 360"
+            productionYear="2015"
+            usb20="false"
+            price="10000.00"
+          />
+        </div>
+        <div>
+          <Camera
+            producer="Sony"
+            model="RX 380"
+            productionYear="2018"
+            usb20="false"
+            price="20000.00"
+          />
+        </div>
       </div>
     );
   }
