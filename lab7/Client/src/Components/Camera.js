@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import { Component } from "react";
 
 class Camera extends Component {
   constructor(producer, model, productionYear, usb20, price) {
@@ -10,16 +10,8 @@ class Camera extends Component {
     this.price = price;
   }
 
-  render() {
-    return (
-      <div>
-        <p>Producer: {this.producer}</p>
-        <p>Model: {this.model}</p>
-        <p>ProductionYear: {this.productionYear}</p>
-        <p>USB20: {this.usb20}</p>
-        <p>Price: {this.price}</p>
-      </div>
-    );
+  takePicture() {
+    return "Taking an picture...";
   }
 }
 
