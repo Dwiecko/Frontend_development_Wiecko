@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import "./App.css";
 import Camera from "./Components/Camera";
 import CamerasCatalogue from "./Containers/CamerasCatalogue";
 
