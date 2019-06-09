@@ -47,50 +47,57 @@ class App extends Component {
   componentWillUnmount() {
     clearInterval(this.timerState);
   }
-
   render() {
     return (
       <div>
         <div className="allCameras">
           <h2>All cameras:</h2>
           <table>
-            <tr>
-              <th>Model</th>
-              <th>Producer</th>
-              <th>ProductionYear</th>
-              <th>USB20</th>
-              <th>Price</th>
-            </tr>
-
-            {this.state.allCameras.map(camera => (
-              <tr key={camera.toString()}>
-                <td>{camera.model}</td>
-                <td>{camera.producer}</td>
-                <td>{camera.productionYear}</td>
-                <td>{camera.USB20}</td>
-                <td>{camera.price}</td>
+            <thead>
+              <tr>
+                <th>Model</th>
+                <th>Producer</th>
+                <th>Production Year</th>
+                <th>USB20</th>
+                <th>Price</th>
               </tr>
-            ))}
+            </thead>
+            <tbody>
+              {this.state.allCameras.map(camera => (
+                <tr key={camera.toString()}>
+                  <td>{camera.model}</td>
+                  <td>{camera.producer}</td>
+                  <td>{camera.productionYear}</td>
+                  <td>{camera.USB20}</td>
+                  <td>{camera.price}</td>
+                </tr>
+              ))}
+            </tbody>
           </table>
         </div>
+
         <div className="randomCamera">
           <h2>
             Random camera array index from 0 to{" "}
             {this.state.allCameras.length - 1}: {this.state.randomCameraIndex}
           </h2>
-          <table key={this.state.randomCameraIndex}>
-            <tr>
-              <th>Model</th>
-              <th>Producer</th>
-            </tr>
-            <tr>
-              <td>
-                {this.state.allCameras[this.state.randomCameraIndex].model}
-              </td>
-              <td>
-                {this.state.allCameras[this.state.randomCameraIndex].producer}
-              </td>
-            </tr>
+          <table key={this.state.allCameras[this.state.randomCameraIndex]}>
+            <thead>
+              <tr>
+                <th>Model</th>
+                <th>Producer</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  {this.state.allCameras[this.state.randomCameraIndex].model}
+                </td>
+                <td>
+                  {this.state.allCameras[this.state.randomCameraIndex].producer}
+                </td>
+              </tr>
+            </tbody>
           </table>
         </div>
       </div>
