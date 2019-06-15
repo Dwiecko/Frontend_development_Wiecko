@@ -1,5 +1,6 @@
-const express = require("express");
-const bodyParser = require("body-parser");
+import CamerasCatalogue from "../src/Services/CamerasCatalogue";
+import express from "express";
+import bodyParser from "body-parser";
 
 const app = express();
 const port = 4000;
@@ -12,16 +13,23 @@ app.get("/api/", (req, res) => res.send("Hi there"));
 app.get("/api/cameras/all", (req, res) =>
   res.send(camerasCatalogue.getAllCameras())
 );
+app.get("/api/cameras/get/:id", (req, res) => {
+  let id = parseInt(req.params.id);
+  let camera = camerasCatalogue.getById(id);
 
-app.get("/api/cameras/get", (req, res) => {
-  const cameraModel = req.body.cameraModel;
-
-  res.send(camerasCatalogue.getAllCameras());
+  res.send(JSON.stringify(camera, null, 2));
 });
 
 app.post("/api/cameras", (req, res) => {
-  camerasCatalogue.addCamera(req.camera);
-  res.send({ message: "camera was added" });
+  let status = camerasCatalogue.add(req.body);
+  res.send(status);
+});
+
+app.delete("/api/cameras/:id", (req, res) => {
+  let id = parseInt(req.params.id);
+  let status = camerasCatalogue.delete(id);
+
+  res.send(status);
 });
 
 app.listen(port, () => console.log(`Example app listening on port ${port}`));
