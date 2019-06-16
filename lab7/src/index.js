@@ -1,4 +1,4 @@
-import CamerasCatalogue from "../src/Services/CamerasCatalogue";
+import CamerasCatalogue from "./Services/CamerasCatalogue";
 import express from "express";
 import bodyParser from "body-parser";
 
